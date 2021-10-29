@@ -1,0 +1,16 @@
+[
+  {
+    "modid": "framework",
+    "name": "A highly customizable dedicated destructive map component architecture suitable for exploration records outside the ring",
+    "description": "A highly customizable dedicated destructive map component architecture suitable for exploration records outside the ring",
+    "version": "1.0",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": ["growuphappily"],
+    "credits": "LouZiGe for the name",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]
