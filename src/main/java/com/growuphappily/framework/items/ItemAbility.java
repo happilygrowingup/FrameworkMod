@@ -1,5 +1,6 @@
 package com.growuphappily.framework.items;
 
+import com.growuphappily.framework.client.ItemInit;
 import com.growuphappily.framework.threads.WallThread;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -9,14 +10,22 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import scala.tools.nsc.symtab.classfile.Pickler;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ItemAbility extends Item {
     public static int height = 3;
     public static int width = 5;
     public static int under = 2;
+    public ItemAbility(){
+        setCreativeTab(ItemInit.tab);
+        setTranslationKey("framework.ability");
+        setRegistryName("framework:ability");
+    }
     public Vec3d getPerpendicularVecXZ(Vec3d v){
         double k = (double)-1 / (v.z / v.x);
         Vec3d vec = new Vec3d(1, 0,k);
@@ -48,9 +57,22 @@ public class ItemAbility extends Item {
             if(currentPos.equals(lastPos))
                 continue;
             Pos.add(currentPos);
+            for (int j = 1; j < height + 1; j++) {
+                Pos.add(new BlockPos(currentPos.getX(),currentPos.getY()+j,currentPos.getZ()));
+            }
+            for (int k = 0; k < under; k++) {
+                Pos.add(new BlockPos(currentPos.getX(),currentPos.getY()-k,currentPos.getZ()));
+            }
             lastPos = currentPos;
         }
-        return Pos;
+        ArrayList<BlockPos> list = new ArrayList<BlockPos>();
+        for (BlockPos p :
+                Pos) {
+            if (!list.contains(p)){
+                list.add(p);
+            }
+        }
+        return list;
     }
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {

@@ -8,7 +8,7 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 public class Framework {
     public static final String MOD_ID = "framework";
     @Mod.EventHandler
-    public void onServerStarting(FMLServerStartingEvent event){
+    public static void onServerStarting(FMLServerStartingEvent event){
         event.registerServerCommand(new SettingsCommand());
     }
 }

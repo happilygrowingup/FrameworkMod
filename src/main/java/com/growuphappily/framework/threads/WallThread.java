@@ -29,8 +29,9 @@ public class WallThread extends Thread{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        for(int i = 0;i<wall.size();i++){
+        for(int i = 0;i<wall.size();){
             world.setBlockState(wall.get(i), last.get(i));
+            i = i+1;
         }
     }
 }

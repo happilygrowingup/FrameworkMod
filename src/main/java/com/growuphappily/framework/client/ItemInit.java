@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @Mod.EventBusSubscriber(modid="framework")
 public class ItemInit {
-    public static CreativeTabs tab = new CreativeTabs("Ability") {
+    public static final CreativeTabs tab = new CreativeTabs("Ability") {
         @Override
         public ItemStack createIcon() {
             return new ItemStack(Items.DIAMOND);
@@ -20,12 +20,9 @@ public class ItemInit {
     };
     public static Item ability;
     @SubscribeEvent
-    public void onItemReg(RegistryEvent.Register<Item> event){
+    public static void onItemReg(RegistryEvent.Register<Item> event){
         event.getRegistry().registerAll(
                 ability = new ItemAbility()
-                        .setCreativeTab(ItemInit.tab)
-                        .setTranslationKey("framework.ability")
-                        .setRegistryName("framework:ability")
         );
     }
 }
