@@ -49,6 +49,12 @@ public class ItemAbility extends Item {
             if(currentPos.equals(lastPos))
                 continue;
             Pos.add(currentPos);
+            for (int j = 1; j < height + 1; j++) {
+                Pos.add(new BlockPos(currentPos.getX(),currentPos.getY()+j,currentPos.getZ()));
+            }
+            for (int k = 0; k < under; k++) {
+                Pos.add(new BlockPos(currentPos.getX(),currentPos.getY()-k,currentPos.getZ()));
+            }
             lastPos = currentPos;
         }
         for(float i = 0; i < (float)width /2.0; i = (float) (i+0.5)){
