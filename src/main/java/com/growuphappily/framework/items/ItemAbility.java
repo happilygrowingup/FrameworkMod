@@ -6,16 +6,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import scala.tools.nsc.symtab.classfile.Pickler;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 public class ItemAbility extends Item {
     public static int height = 3;
@@ -82,9 +79,13 @@ public class ItemAbility extends Item {
     }
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
-        ArrayList<BlockPos> wall = getWall(worldIn,playerIn);
+        ItemStack stack = playerIn.getHeldItem(handIn);
+        if (!playerIn.capabilities.isCreativeMode) {
+            stack.shrink(1);
+        }
+        ArrayList<BlockPos> wall = getWall(worldIn, playerIn);
         WallThread thread = new WallThread(worldIn, wall);
         thread.start();
-        return super.onItemRightClick(worldIn, playerIn, handIn);
+        return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
     }
 }
