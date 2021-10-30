@@ -18,9 +18,14 @@ public class ItemInit {
             return new ItemStack(Items.DIAMOND);
         }
     };
-    public static Item ability = new ItemAbility();
+    public static Item ability;
     @SubscribeEvent
     public void onItemReg(RegistryEvent.Register<Item> event){
-        event.getRegistry().register(ability);
+        event.getRegistry().registerAll(
+                ability = new ItemAbility()
+                        .setCreativeTab(ItemInit.tab)
+                        .setTranslationKey("framework.ability")
+                        .setRegistryName("framework:ability")
+        );
     }
 }
